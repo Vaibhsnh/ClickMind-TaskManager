@@ -161,7 +161,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding: clamp(1.5rem, 1vw, 2rem) clamp(1.5rem, 5vw, 8rem);
+  padding: clamp(0.5rem, 0.5vw, 2rem) clamp(1.5rem, 5vw, 8rem);
   overflow-x: hidden;
 }
 
@@ -201,7 +201,7 @@ body {
 .welcome-banner {
   position: relative;
   width: 100%;
-  height: clamp(240px, 18vw, 330px);
+  height: clamp(170px, 18vw, 210px);
   border-radius: 24px;
   overflow: hidden;
   display: flex;
@@ -236,7 +236,7 @@ body {
 
 .banner-content {
   position: relative;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -272,7 +272,7 @@ body {
 }
 
 .stat-box {
-  padding-left: .7rem;
+  padding-left: 0.7rem;
   border-left: 3px solid #dcdcdc;
 }
 
@@ -286,4 +286,175 @@ body {
   font-size: 1.5rem;
   font-weight: 500;
   color: #1e293b;
+}
+
+/*<------------CONTENT GRID------------>*/
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 3vw, 4rem);
+  margin-top: 1rem;
+}
+
+/*<------------SECTION TITLE------------>*/
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title h2 {
+  font-size: clamp(0.2rem, 1.9vw, 2.8rem);
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.section-title a {
+  font-size: 1rem;
+  color: #8b8b8b;
+  text-decoration: none;
+}
+
+/*<------------CARD TOP------------>*/
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-check i {
+  font-size: 0.7rem;
+  color: #ea6a9e;
+}
+
+/*<------------PROJECTS------------>*/
+
+.project-container {
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 0.5rem;
+}
+
+.project-card {
+  position: relative;
+  width: clamp(12rem, 14vw, 20rem);
+  height: clamp(18rem, 19vw, 220rem);
+  padding: 1.4rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.25s;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.card-one {
+  background: #e6679c;
+}
+
+.card-two {
+  background: #ffd15b;
+  transform: rotate(4deg);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-check i {
+  font-size: 0.65rem;
+  color: #e6679c;
+}
+
+.card-menu {
+  font-size: 1rem;
+}
+
+.card-content h3 {
+  font-size: clamp(1.3rem, 1.6vw, 2rem);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.card-footer span {
+  font-size: 0.85rem;
+}
+
+.progress-bar {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  margin-top: 0.4rem;
+  overflow: hidden;
+}
+
+.progress {
+  width: 30%;
+  height: 100%;
+  background: #fff;
+  border-radius: 20px;
+}
+
+/*<------------SCHEDULED------------>*/
+.scheduled-section {
+  width: 100%;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.add-task-btn {
+  min-width: 15rem;
+  height: 58px;
+  background: transparent;
+  border: 2px dashed #d5d5d5;
+  border-radius: 22px;
+  font-size: 1.1rem;
+  color: #5f6672;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.add-task-btn:hover {
+  background: #fafafa;
+  transform: scale(1.05);
 }
