@@ -58,7 +58,7 @@ body {
 }
 
 .search-box:hover {
-  transform: scale(1.05);
+  background-color: #fbfbfc;
 }
 
 .search-box i {
@@ -98,7 +98,6 @@ body {
 .section-heading h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
 }
 
 .section-heading i {
@@ -118,15 +117,15 @@ body {
   padding: 0.25rem 1.2rem;
   font-size: 0.95rem;
   font-weight: 400;
-  color: #606a78;
+  opacity: .7;
   cursor: pointer;
   border-radius: 10px;
   transition: 0.25s;
 }
 
 .sidebar-list li:hover {
-  background: #f3f5fa;
-  color: #111827;
+  background: #e2e8fb;
+  color: black;
 }
 
 /*<------------BUTTON------------>*/
@@ -306,13 +305,13 @@ body {
 .stat-box h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #919191;
+  color: #7c7b7b;
 }
 
 .stat-box span {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: #1e293b;
+  opacity: .6;
 }
 
 /*<------------CONTENT GRID------------>*/
@@ -338,13 +337,13 @@ body {
 
 .section-title h2 {
   font-size: clamp(0.2rem, 1.9vw, 2.8rem);
-  font-weight: 700;
+  font-weight: 600;
   color: #1e293b;
 }
 
 .section-title a {
   font-size: 1rem;
-  color: #8b8b8b;
+  color: #a2a0a0;
   text-decoration: none;
 }
 
