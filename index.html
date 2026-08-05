@@ -332,6 +332,64 @@
       </main>
     </div>
 
+    <!--------------TASK MODAL-------------->
+
+    <div class="modal-overlay">
+      <div class="task-modal">
+        <div class="modal-header">
+          <h2>Add New Task</h2>
+
+          <button class="close-modal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form class="task-form">
+          <div class="form-group">
+            <label>Task Name</label>
+
+            <input type="text" placeholder="Enter task name" />
+          </div>
+
+          <div class="form-group">
+            <label>Project Category</label>
+
+            <div class="project-options">
+              <button type="button" class="project-option active">
+                Task Library
+              </button>
+
+              <button type="button" class="project-option">Challenges</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+
+            <div class="status-options">
+              <button type="button" class="status-option pending active">
+                Pending
+              </button>
+
+              <button type="button" class="status-option progress">
+                In Progress
+              </button>
+
+              <button type="button" class="status-option completed">
+                Completed
+              </button>
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="cancel-btn">Cancel</button>
+
+            <button type="submit" class="save-btn">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
