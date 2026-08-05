@@ -597,7 +597,7 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(8px);
-  /* display: none; */
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -1017,26 +1017,27 @@ body {
     font-size: 0.95rem;
   }
 
- .modal-overlay{
-    padding:1rem;
-    justify-content:center;
-    align-items:center;
-}
+  .modal-overlay {
+    padding: 1rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
 
-.task-modal{
-    width:100%;
-    max-width:420px;
-    height:auto;
-    margin:0;
-    border-radius:22px;
-    padding:1.5rem;
-}
+  .task-modal {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    border-radius: 22px 22px 0 0;
+    padding: 1.5rem;
+    animation: slideUp 0.3s ease;
+  }
 
- .project-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:.75rem;
-}
+  .project-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
 
   .form-buttons {
     flex-direction: column;
@@ -1045,5 +1046,15 @@ body {
   .cancel-btn,
   .save-btn {
     width: 100%;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
   }
 }
