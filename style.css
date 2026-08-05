@@ -624,6 +624,145 @@ body {
     transform: scale(1);
   }
 }
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+.close-modal {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #f4f5f9;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.close-modal:hover {
+  background: #ececec;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.task-form input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.25s;
+}
+
+.task-form input:focus {
+  border-color: #ffb400;
+}
+
+.project-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.project-option {
+  flex: 1;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: #f5f6fa;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+.project-option.active {
+  background: #ffd15b;
+  color: #1f2937;
+}
+
+.status-options {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.status-option {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.25s;
+}
+
+.pending {
+  background: #fff4cf;
+  color: #aa7600;
+}
+
+.progress {
+  background: #e5f7da;
+  color: #4e8a12;
+}
+
+.completed {
+  background: #ffe1ee;
+  color: #d94d88;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancel-btn {
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #d7dce5;
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.save-btn {
+  padding: 0.8rem 1.6rem;
+  border: none;
+  background: #ffb400;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+}
 /*<------------TABLET------------>*/
 
 @media screen and (max-width: 1024px) {
