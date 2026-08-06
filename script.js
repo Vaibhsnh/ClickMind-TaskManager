@@ -6,3 +6,7 @@ let setTheme = () => {
   }
 };
 setTheme();
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){
+  setTheme();
+})
