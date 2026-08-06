@@ -12,7 +12,10 @@
 }
 
 body {
-  background: #f7f8fc;
+  transition: 
+    background-color 0.3s ease
+    color 0.3s ease;
+  /* background: #f7f8fc; */
 }
 
 /*<------------APP LAYOUT------------>*/
