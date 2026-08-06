@@ -1,24 +1,28 @@
-let setTheme = () => {
+let setThemeDarkorLight = () => {
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.setAttribute("data-theme", "dark");
   } else {
     document.body.setAttribute("data-theme", "light");
   }
 };
-setTheme();
+setThemeDarkorLight();
 
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", function () {
-    setTheme();
+    setThemeDarkorLight();
   });
 
-const toggleTheme = document.querySelector(".theme-btn");
+let toggleTheme = () => {
+  const toggleTheme = document.querySelector(".theme-btn");
 
-toggleTheme.addEventListener("click", function () {
-  if (document.body.getAttribute("data-theme")=== "dark") {
-    document.body.setAttribute("data-theme", "light");
-  } else {
-    document.body.setAttribute("data-theme", "dark");
-  }
-});
+  toggleTheme.addEventListener("click", function () {
+    if (document.body.getAttribute("data-theme") === "dark") {
+      document.body.setAttribute("data-theme", "light");
+    } else {
+      document.body.setAttribute("data-theme", "dark");
+    }
+  });
+};
+
+toggleTheme();
