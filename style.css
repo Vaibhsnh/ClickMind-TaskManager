@@ -215,7 +215,7 @@ body {
 .main-header h2 {
   font-size: clamp(0.4rem, 1.1vw, 2rem);
   font-weight: 600;
-  color: #1e293b;
+  color: var(--primary-text);
 }
 
 .theme-btn {
@@ -339,7 +339,7 @@ body {
 .stat-box h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #7c7b7b;
+  color: var(--secondary-text);
 }
 
 .stat-box span {
@@ -372,12 +372,12 @@ body {
 .section-title h2 {
   font-size: clamp(0.2rem, 1.9vw, 2.8rem);
   font-weight: 600;
-  color: #1e293b;
+  color: var(--primary-text);
 }
 
 .section-title a {
   font-size: 1rem;
-  color: #a2a0a0;
+  color: var(--secondary-text);
   text-decoration: none;
 }
 
@@ -421,7 +421,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #fff;
+  color: var(--primary-text);
   box-shadow:var(--shadow);
   transition: 0.25s;
 }
@@ -525,7 +525,7 @@ body {
   border: 2px dashed #a3a1a1;
   border-radius: 22px;
   font-size: 1.1rem;
-  color: #5f6672;
+  color: var(--secondary-text);
   cursor: pointer;
   transition: 0.25s;
 }
@@ -617,13 +617,14 @@ body {
   height: 36px;
   border: none;
   background: transparent;
+  color: var(--primary-text);
   cursor: pointer;
   border-radius: 8px;
   transition: 0.25s;
 }
 
 .icon-btn:hover {
-  background: #f5f5f5;
+  background: var(--secondary-text);
 }
 
 .modal-overlay {
