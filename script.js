@@ -1,34 +1,47 @@
-let setThemeDarkorLight = () => {
+let setTheme = () => {
   const logo = document.querySelector(".logo img");
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    document.body.setAttribute("data-theme", "dark");
-    logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
-  } else {
-    document.body.setAttribute("data-theme", "light");
-    logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
-  }
-};
-setThemeDarkorLight();
+  const themeIcon = document.querySelector(".theme-btn i");
 
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", function () {
-    setThemeDarkorLight();
-  });
-
-let toggleTheme = () => {
-  const toggleTheme = document.querySelector(".theme-btn");
-  const logo = document.querySelector(".logo img");
-
-  toggleTheme.addEventListener("click", function () {
-    if (document.body.getAttribute("data-theme") === "dark") {
-      document.body.setAttribute("data-theme", "light");
-      logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
-    } else {
+  let setThemeDarkorLight = () => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       document.body.setAttribute("data-theme", "dark");
       logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+    } else {
+      document.body.setAttribute("data-theme", "light");
+      logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
     }
-  });
+  };
+  setThemeDarkorLight();
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", function () {
+      setThemeDarkorLight();
+    });
+
+  let toggleTheme = () => {
+    const toggleTheme = document.querySelector(".theme-btn");
+
+    toggleTheme.addEventListener("click", function () {
+      if (document.body.getAttribute("data-theme") === "dark") {
+        document.body.setAttribute("data-theme", "light");
+        logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
+        themeIcon.classList.remove("fa-sun");
+        themeIcon.classList.add("fa-moon");
+      } else {
+        document.body.setAttribute("data-theme", "dark");
+        logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+      }
+    });
+  };
+
+  toggleTheme();
 };
 
-toggleTheme();
+setTheme();
