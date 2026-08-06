@@ -2,7 +2,7 @@ let setTheme = () => {
   const logo = document.querySelector(".logo img");
   const themeIcon = document.querySelector(".theme-btn i");
 
-  let setThemeDarkorLight = () => {
+  let applySystemTheme = () => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       document.body.setAttribute("data-theme", "dark");
       logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
@@ -15,12 +15,12 @@ let setTheme = () => {
       themeIcon.classList.add("fa-moon");
     }
   };
-  setThemeDarkorLight();
+  applySystemTheme();
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", function () {
-      setThemeDarkorLight();
+      applySystemTheme();
     });
 
   let toggleTheme = () => {
