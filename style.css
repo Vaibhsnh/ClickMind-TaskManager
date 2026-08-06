@@ -2,6 +2,39 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+/*<------------LIGHT THEME------------>*/
+
+:root,
+[data-theme="light"] {
+  --bg-color: #f7f8fc;
+  --surface: #ffffff;
+  --sidebar: #f0f0fa;
+  --primary-text: #1f2937;
+  --secondary-text: #808080;
+  --border: #e5e7eb;
+  --yellow: #ffd15b;
+  --yellow-soft: #fff4cf;
+  --green: #e5f7da;
+  --pink: #ffe1ee;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/*<------------DARK THEME------------>*/
+
+[data-theme="dark"] {
+  --bg-color: #17191f;
+  --surface: #24262d;
+  --sidebar: #1e2027;
+  --primary-text: #f5f5f5;
+  --secondary-text: #a8adb8;
+  --border: #3a3d45;
+  --yellow: #f8b93a;
+  --yellow-soft: #4d3b0d;
+  --green: #2e7d32;
+  --pink: #b73e7b;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
 /*<------------RESET------------>*/
 
 * {
@@ -12,10 +45,9 @@
 }
 
 body {
-  transition: 
-    background-color 0.3s ease
-    color 0.3s ease;
-  /* background: #f7f8fc; */
+  transition: background-color 0.3s ease color 0.3s ease;
+  background: var(--bg-color);
+  color: var(--primary-text);
 }
 
 /*<------------APP LAYOUT------------>*/
@@ -32,8 +64,7 @@ body {
   width: clamp(250px, 18vw, 290px);
   height: 100vh;
   padding: clamp(1.3rem, 1vw, 1.8rem);
-  background: #f0f0fa;
-  border-right: 1px solid #e8e8e8;
+  background:var(--sidebar);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -194,7 +225,7 @@ body {
   border-radius: 50%;
   background: #ffffff;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:var(--shadow);
 }
 
 .theme-btn i {
@@ -212,7 +243,7 @@ body {
   border-radius: 50%;
   background: #ffffff;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:var(--shadow);
   transition: 0.25s;
 }
 
@@ -391,7 +422,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   color: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  box-shadow:var(--shadow);
   transition: 0.25s;
 }
 
@@ -507,11 +538,11 @@ body {
 /*<------------TASK CARD------------>*/
 
 .task-card {
-  background: #fff;
+  background:var(--surface);
   border-radius: 22px;
   padding: 1rem;
   border-left: 5px solid #f4b400;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+  box-shadow:var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -533,7 +564,7 @@ body {
 
 .task-project {
   font-size: 0.95rem;
-  color: #808080;
+  color:var(--primary-text);
 }
 
 .task-project span {
@@ -546,7 +577,7 @@ body {
 .task-title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #1f2937;
+  color:var(--primary-text);
 }
 
 /*<------------ACTIONS------------>*/
@@ -613,7 +644,7 @@ body {
   background: #fff;
   border-radius: 22px;
   padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow:var(--shadow);
   animation: popup 0.25s ease;
 }
 
