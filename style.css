@@ -421,7 +421,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--primary-text);
+  color: #fff;
   box-shadow:var(--shadow);
   transition: 0.25s;
 }
