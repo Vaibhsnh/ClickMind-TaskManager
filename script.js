@@ -1,4 +1,4 @@
-let setTheme = () => {
+let setTheme = () => { 
   const logo = document.querySelector(".logo img");
   const themeIcon = document.querySelector(".theme-btn i");
 
@@ -15,12 +15,31 @@ let setTheme = () => {
       themeIcon.classList.add("fa-moon");
     }
   };
-  applySystemTheme();
+
+  if (localStorage.getItem("theme")) {
+    document.body.setAttribute(
+      "data-theme",
+      `${localStorage.getItem("theme")}`,
+    );
+    if (document.body.getAttribute("data-theme") === "dark") {
+      logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+    } else {
+      logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
+    }
+  } else {
+    applySystemTheme();
+  }
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", function () {
-      applySystemTheme();
+      if (!localStorage.getItem("theme")) {
+        applySystemTheme();
+      }
     });
 
   let toggleTheme = () => {
@@ -29,11 +48,17 @@ let setTheme = () => {
     toggleTheme.addEventListener("click", function () {
       if (document.body.getAttribute("data-theme") === "dark") {
         document.body.setAttribute("data-theme", "light");
+
+        localStorage.setItem("theme", "light");
+
         logo.setAttribute("src", "assets/logo/ClickMind_DarkLogo.png");
         themeIcon.classList.remove("fa-sun");
         themeIcon.classList.add("fa-moon");
       } else {
         document.body.setAttribute("data-theme", "dark");
+
+        localStorage.setItem("theme", "dark");
+
         logo.setAttribute("src", "assets/logo/ClickMind_LightLogo.png");
         themeIcon.classList.remove("fa-moon");
         themeIcon.classList.add("fa-sun");
