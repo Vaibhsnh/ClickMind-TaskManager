@@ -75,7 +75,6 @@ let initializeSidebar = () => {
   const menuBtn = document.querySelector(".menu-btn");
   const sideBar = document.querySelector(".sidebar");
   menuBtn.addEventListener("click", function () {
-    console.log("menu btn clicked...");
     sideBar.classList.toggle("active");
   });
   window.addEventListener("click", function (evt) {
@@ -84,6 +83,12 @@ let initializeSidebar = () => {
       !sideBar.contains(evt.target) &&
       !menuBtn.contains(evt.target)
     ) {
+      sideBar.classList.remove("active");
+    }
+  });
+
+  window.addEventListener("scroll", function () {
+    if (sideBar.classList.contains("active")) {
       sideBar.classList.remove("active");
     }
   });
