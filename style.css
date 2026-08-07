@@ -901,10 +901,11 @@ body {
     width: 260px;
     height: 100vh;
     padding: 1rem;
-    background: #f0f0fa;
+    background: var(--sidebar);
     border-right: 1px solid #ddd;
     transition: 0.3s;
     z-index: 999;
+    animation: slideRight 0.3s ease;
   }
 
   .sidebar.active {
@@ -1090,6 +1091,16 @@ body {
 
     to {
       transform: translateY(0);
+    }
+  }
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
     }
   }
 }

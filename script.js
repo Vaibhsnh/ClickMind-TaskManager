@@ -1,4 +1,4 @@
-let setTheme = () => { 
+let setTheme = () => {
   const logo = document.querySelector(".logo img");
   const themeIcon = document.querySelector(".theme-btn i");
 
@@ -70,3 +70,23 @@ let setTheme = () => {
 };
 
 setTheme();
+
+let initializeSidebar = () => {
+  const menuBtn = document.querySelector(".menu-btn");
+  const sideBar = document.querySelector(".sidebar");
+  menuBtn.addEventListener("click", function () {
+    console.log("menu btn clicked...");
+    sideBar.classList.toggle("active");
+  });
+  window.addEventListener("click", function (evt) {
+    if (
+      sideBar.classList.contains("active") &&
+      !sideBar.contains(evt.target) &&
+      !menuBtn.contains(evt.target)
+    ) {
+      sideBar.classList.remove("active");
+    }
+  });
+};
+
+initializeSidebar();
