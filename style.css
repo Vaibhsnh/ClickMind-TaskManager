@@ -86,13 +86,14 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding: 0.95rem 1rem;
-  border: 1px solid #dddddd;
+  background-color: var(--bg-color);
+  border: none;
   border-radius: 10px;
   transition: 0.25s;
 }
 
 .search-box:hover {
-  background-color: #fbfbfc;
+  background-color: var(--surface);
 }
 
 .search-box i {
@@ -158,8 +159,8 @@ body {
 }
 
 .sidebar-list li:hover {
-  background: #e2e8fb;
-  color: black;
+  background: var(--bg-color);
+  color: var(--primary-text);
 }
 
 /*<------------BUTTON------------>*/
@@ -169,8 +170,8 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding: 0.8rem 1rem;
-  background: #ffffff;
-  border: 1px solid #d9efda;
+  background: var(--surface);
+  border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.25s;
@@ -178,13 +179,13 @@ body {
 
 .sidebar-btn i {
   font-size: 1.6rem;
-  color: #1f2937;
+  color: var(--primary-text);
 }
 
 .sidebar-btn span {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #5f6672;
+  color: var(--secondary-text);
 }
 
 .sidebar-btn:hover {
@@ -531,7 +532,8 @@ body {
 }
 
 .add-task-btn:hover {
-  background: #fafafa;
+  background: var(--surface);
+  color: var(--primary-text);
   transform: translateY(-0.2rem);
 }
 
@@ -624,7 +626,7 @@ body {
 }
 
 .icon-btn:hover {
-  background: var(--secondary-text);
+  background: var(--bg-color);
 }
 
 .modal-overlay {
@@ -642,7 +644,7 @@ body {
 .task-modal {
   width: 520px;
   max-width: 100%;
-  background: #fff;
+  background: var(--bg-color);
   border-radius: 22px;
   padding: 2rem;
   box-shadow:var(--shadow);
@@ -669,21 +671,22 @@ body {
 
 .modal-header h2 {
   font-size: 1.5rem;
-  color: #1f2937;
+  color: var(--primary-text);
 }
 
 .close-modal {
   width: 42px;
   height: 42px;
   border: none;
-  background: #f4f5f9;
+  background: var(--bg-color);
+  color: var(--primary-text);
   border-radius: 50%;
   cursor: pointer;
   transition: 0.25s;
 }
 
 .close-modal:hover {
-  background: #ececec;
+  background: var(--surface);
 }
 
 .task-form {
@@ -701,13 +704,14 @@ body {
 .form-group label {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--secondary-text);
 }
 
 .task-form input {
   width: 100%;
   padding: 0.9rem 1rem;
   border: 1px solid #e5e7eb;
+  background-color: var(--surface);
   border-radius: 12px;
   font-size: 0.95rem;
   outline: none;
@@ -728,7 +732,8 @@ body {
   height: 46px;
   border: none;
   border-radius: 12px;
-  background: #f5f6fa;
+  background: var(--surface);
+  color: var(--primary-text);
   cursor: pointer;
   font-weight: 500;
   transition: 0.25s;
@@ -736,7 +741,8 @@ body {
 
 .project-option.active {
   background: #ffd15b;
-  color: #1f2937;
+  font-weight: 600;
+  color: var(--primary-text);
 }
 
 .status-options {
@@ -778,10 +784,17 @@ body {
 
 .cancel-btn {
   padding: 0.8rem 1.5rem;
-  border: 1px solid #d7dce5;
-  background: #fff;
+  border: none;
+  background: var(--bg-color);
+  color: var(--primary-text);
+  font-weight: 600;
   border-radius: 12px;
   cursor: pointer;
+  transition: .2s ease;
+}
+
+.cancel-btn:hover{
+  background-color: var(--surface);
 }
 
 .save-btn {
