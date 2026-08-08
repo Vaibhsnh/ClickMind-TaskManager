@@ -64,7 +64,6 @@ let setTheme = () => {
 
   toggleTheme();
 };
-
 setTheme();
 
 let initializeSidebar = () => {
@@ -89,5 +88,38 @@ let initializeSidebar = () => {
     }
   });
 };
-
 initializeSidebar();
+
+let formHandler = () => {
+  const modalOverlay = document.querySelector(".modal-overlay");
+  let initializeFormModal = () => {
+    modalOverlay.style.display = "flex";
+  };
+
+  let removeFormModal = () => {
+    modalOverlay.style.display = "none";
+  };
+
+  let activeForm = () => {
+    const addNewTask = document.querySelectorAll(".add-new-task-btn");
+
+    addNewTask.forEach((button) => {
+      button.addEventListener("click", () => {
+        initializeFormModal();
+      });
+    });
+  };
+  activeForm();
+
+  let closeActiveForm = () => {
+    const closeForm = document.querySelectorAll(".close-form");
+
+    closeForm.forEach((button) => {
+      button.addEventListener("click", () => {
+        removeFormModal();
+      });
+    });
+  };
+  closeActiveForm();
+};
+formHandler();
