@@ -1,3 +1,8 @@
+let currentFilter = {
+  type: "all",
+  value: "all",
+};
+
 let setTheme = () => {
   const logo = document.querySelector(".logo img");
   const themeIcon = document.querySelector(".theme-btn i");
@@ -94,6 +99,22 @@ const modalOverlay = document.querySelector(".modal-overlay");
 const taskForm = document.querySelector(".task-form");
 let initializeFormModal = () => {
   taskForm.reset();
+
+  // Remove previously selected category
+  const activeProjectOption =
+    document.querySelector(".project-option.active");
+
+  if (activeProjectOption) {
+    activeProjectOption.classList.remove("active");
+  }
+
+  // Remove previously selected status
+  const activeStatusOption =
+    document.querySelector(".status-option.active");
+
+  if (activeStatusOption) {
+    activeStatusOption.classList.remove("active");
+  }
   modalOverlay.style.display = "flex";
 };
 
@@ -122,6 +143,14 @@ let closeActiveForm = () => {
   });
 };
 closeActiveForm();
+
+let deleteTask = (taskId) => {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks = tasks.filter((task) => task.id !== Number(taskId));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  updateTaskStats();
+  showFilteredTasks(currentFilter.type, currentFilter.value);
+};
 
 // Create and append a task card
 let renderTaskCard = (task) => {
@@ -182,6 +211,12 @@ let renderTaskCard = (task) => {
   `;
 
   scheduledList.prepend(taskCard);
+
+  const deleteBtn = taskCard.querySelector(".delete-btn");
+
+  deleteBtn.addEventListener("click", () => {
+    deleteTask(task.id);
+  });
 };
 
 let updateTaskStats = () => {
@@ -239,7 +274,6 @@ let updateTaskStats = () => {
   const statsPendingCount = document.querySelector(".stats-pending-count"); //t
   const inProgressCount = document.querySelector(".in-progress-count"); //t
   const doneCount = document.querySelector(".done-count"); //t
-  const scheduledCount = document.querySelector(".scheduled-count"); //t
   const libraryTotalCount = document.querySelector(".library-total-count"); //t
   const libraryCompletedCount = document.querySelector(
     ".library-completed-count",
@@ -263,7 +297,6 @@ let updateTaskStats = () => {
   statsPendingCount.textContent = pendingTotal;
   inProgressCount.textContent = inProgressTotal;
   doneCount.textContent = completedTotal;
-  scheduledCount.textContent = totalTasks;
   libraryTotalCount.textContent = libraryTotal;
   libraryCompletedCount.textContent = libraryCompleted;
   challengeTotalCount.textContent = challengeTotal;
@@ -273,37 +306,6 @@ let updateTaskStats = () => {
 
   libraryProgress.style.width = `${libraryProgressPercentage}%`;
   challengeProgress.style.width = `${challengeProgressPercentage}%`;
-};
-
-let loadTasks = () => {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-  tasks.forEach((task) => {
-    renderTaskCard(task);
-  });
-  updateTaskStats();
-};
-loadTasks();
-
-let showProjectTasks = (category) => {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-  const filteredTasks = tasks.filter((task) => task.category === category);
-
-  const scheduleList = document.querySelector(".schedule-list");
-
-  const scheduledTitle = document.querySelector(".scheduled-title");
-
-  const projectName =
-    category === "task-library" ? "Task Library" : "Challenges";
-
-  scheduleList.innerHTML = "";
-
-  filteredTasks.forEach((task) => {
-    renderTaskCard(task);
-  });
-
-  scheduledTitle.innerHTML = `Scheduled → ${projectName} (${filteredTasks.length})`;
 };
 
 let showFilteredTasks = (filterType, filterValue) => {
@@ -344,14 +346,27 @@ let showFilteredTasks = (filterType, filterValue) => {
   });
 };
 
+let loadTasks = () => {
+  updateTaskStats();
+  showFilteredTasks("all", "all");
+};
+loadTasks();
+
 let initializeSidebarFilters = () => {
   const sidebarFilters = document.querySelectorAll(".sidebar-filter");
 
   sidebarFilters.forEach((filter) => {
     filter.addEventListener("click", () => {
       const filterType = filter.dataset.filterType;
-
       const filterValue = filter.dataset.filter;
+
+      currentFilter.type = filterType;
+      currentFilter.value = filterValue;
+
+      console.log("Clicked:", filter);
+      console.log("Filter Type:", filterType);
+      console.log("Filter Value:", filterValue);
+      console.log("Current Filter:", currentFilter);
 
       showFilteredTasks(filterType, filterValue);
     });
@@ -366,7 +381,10 @@ let initializeProjectCards = () => {
     card.addEventListener("click", () => {
       const category = card.dataset.category;
 
-      showProjectTasks(category);
+      currentFilter.type = "category";
+      currentFilter.value = category;
+
+      showFilteredTasks("category", category);
     });
   });
 };
@@ -459,8 +477,8 @@ let formHandler = () => {
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       tasks.push(task);
       localStorage.setItem("tasks", JSON.stringify(tasks));
-      renderTaskCard(task);
       updateTaskStats();
+       showFilteredTasks(currentFilter.type, currentFilter.value);
       removeFormModal();
     }
   });
