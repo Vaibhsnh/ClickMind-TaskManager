@@ -101,16 +101,14 @@ let initializeFormModal = () => {
   taskForm.reset();
 
   // Remove previously selected category
-  const activeProjectOption =
-    document.querySelector(".project-option.active");
+  const activeProjectOption = document.querySelector(".project-option.active");
 
   if (activeProjectOption) {
     activeProjectOption.classList.remove("active");
   }
 
   // Remove previously selected status
-  const activeStatusOption =
-    document.querySelector(".status-option.active");
+  const activeStatusOption = document.querySelector(".status-option.active");
 
   if (activeStatusOption) {
     activeStatusOption.classList.remove("active");
@@ -147,6 +145,27 @@ closeActiveForm();
 let deleteTask = (taskId) => {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks = tasks.filter((task) => task.id !== Number(taskId));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  updateTaskStats();
+  showFilteredTasks(currentFilter.type, currentFilter.value);
+};
+
+let toggleTaskStatus = (taskId) => {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.map((task) => {
+    if (task.id === Number(taskId)) {
+      if (task.status === "pending") {
+        task.status = "in-progress";
+      } else if (task.status === "in-progress") {
+        task.status = "completed";
+      } else {
+        task.status = "pending";
+      }
+    }
+    return task;
+  });
+
   localStorage.setItem("tasks", JSON.stringify(tasks));
   updateTaskStats();
   showFilteredTasks(currentFilter.type, currentFilter.value);
@@ -216,6 +235,12 @@ let renderTaskCard = (task) => {
 
   deleteBtn.addEventListener("click", () => {
     deleteTask(task.id);
+  });
+
+  const completeBtn = taskCard.querySelector(".complete-btn");
+
+  completeBtn.addEventListener("click", () => {
+    toggleTaskStatus(task.id);
   });
 };
 
@@ -478,7 +503,7 @@ let formHandler = () => {
       tasks.push(task);
       localStorage.setItem("tasks", JSON.stringify(tasks));
       updateTaskStats();
-       showFilteredTasks(currentFilter.type, currentFilter.value);
+      showFilteredTasks(currentFilter.type, currentFilter.value);
       removeFormModal();
     }
   });
