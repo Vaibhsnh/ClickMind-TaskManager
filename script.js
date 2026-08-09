@@ -303,6 +303,40 @@ let loadTasks = () => {
 };
 loadTasks();
 
+let showProjectTasks = (category) => {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  const filteredTasks = tasks.filter((task) => task.category === category);
+
+  const scheduleList = document.querySelector(".schedule-list");
+
+  const scheduledTitle = document.querySelector(".scheduled-title");
+
+  const projectName =
+    category === "task-library" ? "Task Library" : "Challenges";
+
+  scheduleList.innerHTML = "";
+
+  filteredTasks.forEach((task) => {
+    renderTaskCard(task);
+  });
+
+  scheduledTitle.innerHTML = `Scheduled → ${projectName} (${filteredTasks.length})`;
+};
+
+let initializeProjectCards = () => {
+  const projectCards = document.querySelectorAll(".project-card");
+
+  projectCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const category = card.dataset.category;
+
+      showProjectTasks(category);
+    });
+  });
+};
+initializeProjectCards();
+
 let formHandler = () => {
   const taskNameInput = document.querySelector(".task-name-input");
   const taskNameRegex =
