@@ -293,6 +293,16 @@ let updateTaskStats = () => {
   challengeProgress.style.width = `${challengeProgressPercentage}%`;
 };
 
+let loadTasks = () => {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach((task) => {
+    renderTaskCard(task);
+  });
+  updateTaskStats();
+};
+loadTasks();
+
 let formHandler = () => {
   const taskNameInput = document.querySelector(".task-name-input");
   const taskNameRegex =
