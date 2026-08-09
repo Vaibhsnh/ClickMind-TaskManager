@@ -3,6 +3,8 @@ let currentFilter = {
   value: "all",
 };
 
+let editingTaskId = null;
+
 let setTheme = () => {
   const logo = document.querySelector(".logo img");
   const themeIcon = document.querySelector(".theme-btn i");
@@ -171,6 +173,58 @@ let toggleTaskStatus = (taskId) => {
   showFilteredTasks(currentFilter.type, currentFilter.value);
 };
 
+let openEditForm = (task) => {
+  const taskNameInput = document.querySelector(".task-name-input");
+
+  const projectCategory = document.querySelector(".project-options");
+
+  const projectStatus = document.querySelector(".status-options");
+
+  const saveTaskBtn = document.querySelector(".save-btn");
+
+  // Tell the form that we are editing
+  editingTaskId = task.id;
+
+  // Fill task name
+  taskNameInput.value = task.taskName;
+
+  // Remove previous selections
+  projectCategory.querySelectorAll(".project-option").forEach((button) => {
+    button.classList.remove("active");
+  });
+
+  projectStatus.querySelectorAll(".status-option").forEach((button) => {
+    button.classList.remove("active");
+  });
+
+  // Select category
+  const categoryButton =
+    task.category === "task-library"
+      ? projectCategory.querySelector(".task-library")
+      : projectCategory.querySelector(".challenges");
+
+  categoryButton.classList.add("active");
+
+  // Select status
+  let statusButton;
+
+  if (task.status === "pending") {
+    statusButton = projectStatus.querySelector(".pending");
+  } else if (task.status === "in-progress") {
+    statusButton = projectStatus.querySelector(".progress");
+  } else {
+    statusButton = projectStatus.querySelector(".completed");
+  }
+
+  statusButton.classList.add("active");
+
+  // Change button text
+  saveTaskBtn.textContent = "Update Task";
+
+  // Open modal
+  modalOverlay.style.display = "flex";
+};
+
 // Create and append a task card
 let renderTaskCard = (task) => {
   const scheduledList = document.querySelector(".schedule-list");
@@ -231,16 +285,22 @@ let renderTaskCard = (task) => {
 
   scheduledList.prepend(taskCard);
 
-  const deleteBtn = taskCard.querySelector(".delete-btn");
+  const editBtn = taskCard.querySelector(".edit-btn");
 
-  deleteBtn.addEventListener("click", () => {
-    deleteTask(task.id);
+  editBtn.addEventListener("click", () => {
+    openEditForm(task);
   });
 
   const completeBtn = taskCard.querySelector(".complete-btn");
 
   completeBtn.addEventListener("click", () => {
     toggleTaskStatus(task.id);
+  });
+
+  const deleteBtn = taskCard.querySelector(".delete-btn");
+
+  deleteBtn.addEventListener("click", () => {
+    deleteTask(task.id);
   });
 };
 
@@ -500,7 +560,50 @@ let formHandler = () => {
       };
 
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      tasks.push(task);
+      if (editingTaskId === null) {
+        // CREATE NEW TASK
+
+        const task = {
+          id: Date.now(),
+          taskName: taskName.trim(),
+
+          category: prjCategorySelected.classList.contains("task-library")
+            ? "task-library"
+            : "challenges",
+
+          status: prjStatusSelected.classList.contains("pending")
+            ? "pending"
+            : prjStatusSelected.classList.contains("progress")
+              ? "in-progress"
+              : "completed",
+        };
+
+        tasks.push(task);
+      } else {
+        // UPDATE EXISTING TASK
+
+        tasks = tasks.map((task) => {
+          if (task.id === editingTaskId) {
+            return {
+              ...task,
+
+              taskName: taskName.trim(),
+
+              category: prjCategorySelected.classList.contains("task-library")
+                ? "task-library"
+                : "challenges",
+
+              status: prjStatusSelected.classList.contains("pending")
+                ? "pending"
+                : prjStatusSelected.classList.contains("progress")
+                  ? "in-progress"
+                  : "completed",
+            };
+          }
+
+          return task;
+        });
+      }
       localStorage.setItem("tasks", JSON.stringify(tasks));
       updateTaskStats();
       showFilteredTasks(currentFilter.type, currentFilter.value);
