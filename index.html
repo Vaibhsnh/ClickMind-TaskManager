@@ -32,11 +32,6 @@
           <img src="#" alt="ClickMind Logo" />
         </div>
 
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Searching for..." />
-        </div>
-
         <div class="sidebar-section">
           <div class="section-heading">
             <h3>Projects</h3>
@@ -44,9 +39,17 @@
           </div>
 
           <ul class="sidebar-list">
-            <li>All Projects</li>
-            <li>Task Library (<span class="task-library-count">0</span>)</li>
-            <li>Challenges (<span class="challenges-count">0</span>)</li>
+            <li class="sidebar-filter"  data-filter-type="all" data-filter="all">
+              All Projects
+            </li>
+
+            <li class="sidebar-filter" data-filter-type="category" data-filter="task-library">
+              Task Library (<span class="task-library-count">0</span>)
+            </li>
+
+            <li class="sidebar-filter"  data-filter-type="category" data-filter="challenges">
+              Challenges (<span class="challenges-count">0</span>)
+            </li>
           </ul>
 
           <button class="sidebar-btn add-new-task-btn">
@@ -62,10 +65,21 @@
           </div>
 
           <ul class="sidebar-list">
-            <li>All (<span class="all-tasks-count">0</span>)</li>
-             <li>Pending (<span class="pending-count">0</span>)</li>
-            <li>In Progress (<span class="in-progress-count">0</span>)</li>
-            <li>Done (<span class="done-count">0</span>)</li>
+            <li class="sidebar-filter"  data-filter-type="all" data-filter="all">
+              All (<span class="all-tasks-count">0</span>)
+            </li>
+
+            <li class="sidebar-filter" data-filter-type="status" data-filter="pending">
+              Pending (<span class="pending-count">0</span>)
+            </li>
+
+            <li class="sidebar-filter" data-filter-type="status" data-filter="in-progress">
+              In Progress (<span class="in-progress-count">0</span>)
+            </li>
+
+            <li class="sidebar-filter" data-filter-type="status" data-filter="completed">
+              Completed (<span class="done-count">0</span>)
+            </li>
           </ul>
 
           <button class="sidebar-btn add-new-task-btn">
@@ -146,7 +160,10 @@
             </div>
 
             <div class="project-container">
-              <article class="project-card card-one" data-category="task-library">
+              <article
+                class="project-card card-one"
+                data-category="task-library"
+              >
                 <div class="card-top">
                   <div class="card-check">
                     <i class="fa-solid fa-check"></i>
@@ -213,7 +230,9 @@
 
           <section class="scheduled-section">
             <div class="section-title">
-              <h2 class="scheduled-title">Scheduled (<span class="scheduled-count">0</span>)</h2>
+              <h2 class="scheduled-title">
+                Scheduled (<span class="scheduled-count">0</span>)
+              </h2>
 
               <a href="#">View All</a>
             </div>

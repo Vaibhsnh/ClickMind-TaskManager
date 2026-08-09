@@ -251,24 +251,6 @@ let updateTaskStats = () => {
   const libraryProgress = document.querySelector(".library-progress"); //t
   const challengeProgress = document.querySelector(".challenges-progress"); //t
 
-  console.log("totalTasksCount:", totalTasksCount);
-  console.log("statsProgressCount:", statsProgressCount);
-  console.log("statsCompletedCount:", statsCompletedCount);
-  console.log("allTasksCount:", allTasksCount);
-  console.log("libraryCount:", libraryCount);
-  console.log("challengesCount:", challengesCount);
-  console.log("pendingCount:", pendingCount);
-  console.log("statsPendingCount:", statsPendingCount);
-  console.log("inProgressCount:", inProgressCount);
-  console.log("doneCount:", doneCount);
-  console.log("scheduledCount:", scheduledCount);
-  console.log("libraryTotalCount:", libraryTotalCount);
-  console.log("libraryCompletedCount:", libraryCompletedCount);
-  console.log("challengeTotalCount:", challengeTotalCount);
-  console.log("challengeCompletedCount:", challengeCompletedCount);
-  console.log("libraryProgress:", libraryProgress);
-  console.log("challengeProgress:", challengeProgress);
-
   // UPDATE COUNTS
 
   totalTasksCount.textContent = totalTasks;
@@ -324,6 +306,59 @@ let showProjectTasks = (category) => {
   scheduledTitle.innerHTML = `Scheduled → ${projectName} (${filteredTasks.length})`;
 };
 
+let showFilteredTasks = (filterType, filterValue) => {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  const scheduleList = document.querySelector(".schedule-list");
+  const scheduledTitle = document.querySelector(".scheduled-title");
+
+  let filteredTasks = [];
+
+  if (filterType === "all") {
+    filteredTasks = tasks;
+
+    scheduledTitle.textContent = `Scheduled (${filteredTasks.length})`;
+  } else if (filterType === "category") {
+    filteredTasks = tasks.filter((task) => task.category === filterValue);
+
+    const categoryName =
+      filterValue === "task-library" ? "Task Library" : "Challenges";
+
+    scheduledTitle.textContent = `Scheduled → ${categoryName} (${filteredTasks.length})`;
+  } else if (filterType === "status") {
+    filteredTasks = tasks.filter((task) => task.status === filterValue);
+
+    const statusName =
+      filterValue === "pending"
+        ? "Pending"
+        : filterValue === "in-progress"
+          ? "In Progress"
+          : "Completed";
+
+    scheduledTitle.textContent = `Scheduled → ${statusName} (${filteredTasks.length})`;
+  }
+
+  scheduleList.innerHTML = "";
+  filteredTasks.forEach((task) => {
+    renderTaskCard(task);
+  });
+};
+
+let initializeSidebarFilters = () => {
+  const sidebarFilters = document.querySelectorAll(".sidebar-filter");
+
+  sidebarFilters.forEach((filter) => {
+    filter.addEventListener("click", () => {
+      const filterType = filter.dataset.filterType;
+
+      const filterValue = filter.dataset.filter;
+
+      showFilteredTasks(filterType, filterValue);
+    });
+  });
+};
+initializeSidebarFilters();
+
 let initializeProjectCards = () => {
   const projectCards = document.querySelectorAll(".project-card");
 
@@ -377,15 +412,12 @@ let formHandler = () => {
 
     const taskName = taskNameInput.value;
     let taskNameIsvalid = taskNameRegex.test(taskName);
-    console.log(taskName);
 
     const prjCategorySelected = document.querySelector(
       ".project-option.active",
     );
-    console.log("ProjectCategory->", prjCategorySelected);
 
     const prjStatusSelected = document.querySelector(".status-option.active");
-    console.log("ProjectStatus->", prjStatusSelected);
 
     if (!taskNameIsvalid || !taskName.trim()) {
       errorMessage[0].style.display = "initial";
