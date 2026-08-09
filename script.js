@@ -90,36 +90,194 @@ let initializeSidebar = () => {
 };
 initializeSidebar();
 
+const modalOverlay = document.querySelector(".modal-overlay");
+const taskForm = document.querySelector(".task-form");
+let initializeFormModal = () => {
+  taskForm.reset();
+  modalOverlay.style.display = "flex";
+};
+
+let removeFormModal = () => {
+  modalOverlay.style.display = "none";
+};
+
+let activeForm = () => {
+  const addNewTask = document.querySelectorAll(".add-new-task-btn");
+
+  addNewTask.forEach((button) => {
+    button.addEventListener("click", () => {
+      initializeFormModal();
+    });
+  });
+};
+activeForm();
+
+let closeActiveForm = () => {
+  const closeForm = document.querySelectorAll(".close-form");
+
+  closeForm.forEach((button) => {
+    button.addEventListener("click", () => {
+      removeFormModal();
+    });
+  });
+};
+closeActiveForm();
+
+// Create and append a task card
+let renderTaskCard = (task) => {
+  const scheduledList = document.querySelector(".schedule-list");
+  const taskCard = document.createElement("div");
+
+  taskCard.classList.add("task-card");
+  taskCard.setAttribute("data-status", task.status);
+  taskCard.setAttribute("data-id", task.id);
+
+  let categoryName;
+  if (task.category === "task-library") {
+    categoryName = "Task Library";
+  } else {
+    categoryName = "Challenges";
+  }
+
+  let statusName;
+  if (task.status === "pending") {
+    statusName = "Pending";
+  } else if (task.status === "in-progress") {
+    statusName = "In Progress";
+  } else {
+    statusName = "Completed";
+  }
+
+  taskCard.innerHTML = `
+    <div class="task-header">
+
+      <p class="task-project">
+        Project : <span>${categoryName}</span>
+      </p>
+
+      <div class="task-actions">
+
+        <button class="status-btn ${task.status}">
+          <span class="status-dot"></span>
+          <span class="status-text">${statusName}</span>
+        </button>
+
+        <button class="icon-btn edit-btn">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+
+        <button class="icon-btn complete-btn">
+          <i class="fa-regular fa-square"></i>
+        </button>
+
+        <button class="icon-btn delete-btn">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <h3 class="task-title">${task.taskName}</h3>
+  `;
+
+  scheduledList.prepend(taskCard);
+};
+
 let formHandler = () => {
-  const modalOverlay = document.querySelector(".modal-overlay");
-  let initializeFormModal = () => {
-    modalOverlay.style.display = "flex";
-  };
+  const taskNameInput = document.querySelector(".task-name-input");
+  const taskNameRegex =
+    /^(?=.*[a-zA-Z])[a-zA-Z0-9][a-zA-Z0-9\s'.,!?()_-]{2,99}$/;
+  const errorMessage = document.querySelectorAll(".form-error");
 
-  let removeFormModal = () => {
-    modalOverlay.style.display = "none";
-  };
+  const projectCategory = document.querySelector(".project-options");
+  const projectStatus = document.querySelector(".status-options");
 
-  let activeForm = () => {
-    const addNewTask = document.querySelectorAll(".add-new-task-btn");
+  projectCategory.addEventListener("click", (event) => {
+    const clickedButton = event.target.closest(".project-option");
+    const activeButton = projectCategory.querySelector(
+      ".project-option.active",
+    );
 
-    addNewTask.forEach((button) => {
-      button.addEventListener("click", () => {
-        initializeFormModal();
-      });
-    });
-  };
-  activeForm();
+    if (!activeButton) {
+      clickedButton.classList.add("active");
+    } else {
+      activeButton.classList.remove("active");
+      clickedButton.classList.add("active");
+    }
+  });
 
-  let closeActiveForm = () => {
-    const closeForm = document.querySelectorAll(".close-form");
+  projectStatus.addEventListener("click", (event) => {
+    const clickedButton = event.target.closest(".status-option");
+    const activeButton = projectStatus.querySelector(".status-option.active");
 
-    closeForm.forEach((button) => {
-      button.addEventListener("click", () => {
-        removeFormModal();
-      });
-    });
-  };
-  closeActiveForm();
+    if (!activeButton) {
+      clickedButton.classList.add("active");
+    } else {
+      activeButton.classList.remove("active");
+      clickedButton.classList.add("active");
+    }
+  });
+
+  taskForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const taskName = taskNameInput.value;
+    let taskNameIsvalid = taskNameRegex.test(taskName);
+    console.log(taskName);
+
+    const prjCategorySelected = document.querySelector(
+      ".project-option.active",
+    );
+    console.log("ProjectCategory->", prjCategorySelected);
+
+    const prjStatusSelected = document.querySelector(".status-option.active");
+    console.log("ProjectStatus->", prjStatusSelected);
+
+    if (!taskNameIsvalid || !taskName.trim()) {
+      errorMessage[0].style.display = "initial";
+    } else {
+      errorMessage[0].style.display = "none";
+    }
+
+    if (!prjCategorySelected) {
+      errorMessage[1].style.display = "initial";
+    } else {
+      errorMessage[1].style.display = "none";
+    }
+
+    if (!prjStatusSelected) {
+      errorMessage[2].style.display = "initial";
+    } else {
+      errorMessage[2].style.display = "none";
+    }
+
+    if (
+      taskNameIsvalid &&
+      taskName.trim() &&
+      prjCategorySelected &&
+      prjStatusSelected
+    ) {
+      const task = {
+        id: Date.now(),
+        taskName: taskName.trim(),
+        category: prjCategorySelected.classList.contains("task-library")
+          ? "task-library"
+          : "challenges",
+        status: prjStatusSelected.classList.contains("pending")
+          ? "pending"
+          : prjStatusSelected.classList.contains("progress")
+            ? "in-progress"
+            : "completed",
+      };
+
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTaskCard(task);
+      console.log(tasks);
+      removeFormModal();
+    }
+  });
 };
 formHandler();

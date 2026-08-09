@@ -45,9 +45,8 @@
 
           <ul class="sidebar-list">
             <li>All Projects</li>
-            <li>Next Task (0)</li>
-            <li>Movie Hub (0)</li>
-            <li>War_Arena (0)</li>
+            <li>Task Library (0)</li>
+            <li>Challenges (0)</li>
           </ul>
 
           <button class="sidebar-btn add-new-task-btn">
@@ -235,98 +234,10 @@
 
                 <h3 class="task-title">Create Dashboard Layout</h3>
               </div>
-
-              <div class="task-card" data-status="pending">
-                <div class="task-header">
-                  <p class="task-project">
-                    Project : <span>Task Library</span>
-                  </p>
-
-                  <div class="task-actions">
-                    <button class="status-btn pending">
-                      <span class="status-dot"></span>
-
-                      <span class="status-text"> Pending </span>
-                    </button>
-
-                    <button class="icon-btn edit-btn">
-                      <i class="fa-solid fa-pen"></i>
-                    </button>
-
-                    <button class="icon-btn complete-btn">
-                      <i class="fa-regular fa-square"></i>
-                    </button>
-
-                    <button class="icon-btn delete-btn">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <h3 class="task-title">Create Dashboard Layout</h3>
-              </div>
-
-              <div class="task-card" data-status="pending">
-                <div class="task-header">
-                  <p class="task-project">
-                    Project : <span>Task Library</span>
-                  </p>
-
-                  <div class="task-actions">
-                    <button class="status-btn pending">
-                      <span class="status-dot"></span>
-
-                      <span class="status-text"> Pending </span>
-                    </button>
-
-                    <button class="icon-btn edit-btn">
-                      <i class="fa-solid fa-pen"></i>
-                    </button>
-
-                    <button class="icon-btn complete-btn">
-                      <i class="fa-regular fa-square"></i>
-                    </button>
-
-                    <button class="icon-btn delete-btn">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <h3 class="task-title">Create Dashboard Layout</h3>
-              </div>
-
-              <div class="task-card" data-status="pending">
-                <div class="task-header">
-                  <p class="task-project">
-                    Project : <span>Task Library</span>
-                  </p>
-
-                  <div class="task-actions">
-                    <button class="status-btn pending">
-                      <span class="status-dot"></span>
-
-                      <span class="status-text"> Pending </span>
-                    </button>
-
-                    <button class="icon-btn edit-btn">
-                      <i class="fa-solid fa-pen"></i>
-                    </button>
-
-                    <button class="icon-btn complete-btn">
-                      <i class="fa-regular fa-square"></i>
-                    </button>
-
-                    <button class="icon-btn delete-btn">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <h3 class="task-title">Create Dashboard Layout</h3>
-              </div>
             </div>
-            <button class="add-task-btn add-new-task-btn">+ Add a new task</button>
+            <button class="add-task-btn add-new-task-btn">
+              + Add a new task
+            </button>
           </section>
         </section>
       </main>
@@ -346,39 +257,74 @@
 
         <form class="task-form">
           <div class="form-group">
-            <label>Task Name</label>
+            <label>
+              <i class="fa-solid fa-pen"></i>
+              Task Name
+            </label>
 
-            <input type="text" placeholder="Enter task name" />
+            <input
+              type="text"
+              class="task-name-input"
+              placeholder="Enter task name"
+            />
+
+            <p class="form-error">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              Task name is required.
+            </p>
           </div>
 
           <div class="form-group">
-            <label>Project Category</label>
+            <label>
+              <i class="fa-solid fa-folder"></i>
+              Project Category
+            </label>
 
             <div class="project-options">
-              <button type="button" class="project-option active">
+              <button type="button" class="project-option task-library">
+                <i class="fa-solid fa-book"></i>
                 Task Library
               </button>
 
-              <button type="button" class="project-option">Challenges</button>
+              <button type="button" class="project-option challenges">
+                <i class="fa-solid fa-bolt"></i>
+                Challenges
+              </button>
             </div>
+
+            <p class="form-error">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              Please select a project category.
+            </p>
           </div>
 
           <div class="form-group">
-            <label>Status</label>
+            <label>
+              <i class="fa-solid fa-chart-simple"></i>
+              Status
+            </label>
 
             <div class="status-options">
-              <button type="button" class="status-option pending active">
+              <button type="button" class="status-option pending">
+                <span class="status-dot"></span>
                 Pending
               </button>
 
               <button type="button" class="status-option progress">
+                <span class="status-dot"></span>
                 In Progress
               </button>
 
               <button type="button" class="status-option completed">
+                <span class="status-dot"></span>
                 Completed
               </button>
             </div>
+
+            <p class="form-error">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              Please select a status.
+            </p>
           </div>
 
           <div class="form-buttons">
