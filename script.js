@@ -73,6 +73,17 @@ let setTheme = () => {
 };
 setTheme();
 
+let updateCurrentDate = () => {
+  const dateElement = document.querySelector(".current-date");
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.toLocaleString("en-US", {
+    month: "long",
+  });
+  dateElement.textContent = `Today, ${day} ${month}`;
+};
+updateCurrentDate();
+ 
 let initializeSidebar = () => {
   const menuBtn = document.querySelector(".menu-btn");
   const sideBar = document.querySelector(".sidebar");
