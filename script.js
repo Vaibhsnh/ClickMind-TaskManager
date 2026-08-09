@@ -184,6 +184,115 @@ let renderTaskCard = (task) => {
   scheduledList.prepend(taskCard);
 };
 
+let updateTaskStats = () => {
+  // Get tasks from localStorage
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  // TOTAL TASKS
+
+  const totalTasks = tasks.length;
+
+  // TASK LIBRARY
+
+  const libraryTasks = tasks.filter((task) => task.category === "task-library");
+  const libraryTotal = libraryTasks.length;
+  const libraryCompleted = libraryTasks.filter(
+    (task) => task.status === "completed",
+  ).length;
+
+  // CHALLENGES
+
+  const challengeTasks = tasks.filter((task) => task.category === "challenges");
+  const challengeTotal = challengeTasks.length;
+  const challengeCompleted = challengeTasks.filter(
+    (task) => task.status === "completed",
+  ).length;
+
+  // STATUS COUNTS
+  const pendingTotal = tasks.filter((task) => task.status === "pending").length;
+
+  const inProgressTotal = tasks.filter(
+    (task) => task.status === "in-progress",
+  ).length;
+
+  const completedTotal = tasks.filter(
+    (task) => task.status === "completed",
+  ).length;
+
+  // PROGRESS PERCENTAGES
+
+  const libraryProgressPercentage =
+    libraryTotal === 0 ? 0 : (libraryCompleted / libraryTotal) * 100;
+
+  const challengeProgressPercentage =
+    challengeTotal === 0 ? 0 : (challengeCompleted / challengeTotal) * 100;
+
+  // HTML ELEMENTS
+
+  const totalTasksCount = document.querySelector(".total-tasks-count"); //t
+  const statsProgressCount = document.querySelector(".stats-progress-count"); //t
+  const statsCompletedCount = document.querySelector(".stats-completed-count"); //t
+  const allTasksCount = document.querySelector(".all-tasks-count"); //t
+  const libraryCount = document.querySelector(".task-library-count"); //t
+  const challengesCount = document.querySelector(".challenges-count"); //t
+  const pendingCount = document.querySelector(".pending-count"); //t
+  const statsPendingCount = document.querySelector(".stats-pending-count"); //t
+  const inProgressCount = document.querySelector(".in-progress-count"); //t
+  const doneCount = document.querySelector(".done-count"); //t
+  const scheduledCount = document.querySelector(".scheduled-count"); //t
+  const libraryTotalCount = document.querySelector(".library-total-count"); //t
+  const libraryCompletedCount = document.querySelector(
+    ".library-completed-count",
+  ); //t
+  const challengeTotalCount = document.querySelector(".challenges-total-count"); //t
+  const challengeCompletedCount = document.querySelector(
+    ".challenges-completed-count",
+  ); //t
+  const libraryProgress = document.querySelector(".library-progress"); //t
+  const challengeProgress = document.querySelector(".challenges-progress"); //t
+
+  console.log("totalTasksCount:", totalTasksCount);
+  console.log("statsProgressCount:", statsProgressCount);
+  console.log("statsCompletedCount:", statsCompletedCount);
+  console.log("allTasksCount:", allTasksCount);
+  console.log("libraryCount:", libraryCount);
+  console.log("challengesCount:", challengesCount);
+  console.log("pendingCount:", pendingCount);
+  console.log("statsPendingCount:", statsPendingCount);
+  console.log("inProgressCount:", inProgressCount);
+  console.log("doneCount:", doneCount);
+  console.log("scheduledCount:", scheduledCount);
+  console.log("libraryTotalCount:", libraryTotalCount);
+  console.log("libraryCompletedCount:", libraryCompletedCount);
+  console.log("challengeTotalCount:", challengeTotalCount);
+  console.log("challengeCompletedCount:", challengeCompletedCount);
+  console.log("libraryProgress:", libraryProgress);
+  console.log("challengeProgress:", challengeProgress);
+
+  // UPDATE COUNTS
+
+  totalTasksCount.textContent = totalTasks;
+  statsProgressCount.textContent = inProgressTotal;
+  statsCompletedCount.textContent = completedTotal;
+  allTasksCount.textContent = totalTasks;
+  libraryCount.textContent = libraryTotal;
+  challengesCount.textContent = challengeTotal;
+  pendingCount.textContent = pendingTotal;
+  statsPendingCount.textContent = pendingTotal;
+  inProgressCount.textContent = inProgressTotal;
+  doneCount.textContent = completedTotal;
+  scheduledCount.textContent = totalTasks;
+  libraryTotalCount.textContent = libraryTotal;
+  libraryCompletedCount.textContent = libraryCompleted;
+  challengeTotalCount.textContent = challengeTotal;
+  challengeCompletedCount.textContent = challengeCompleted;
+
+  // UPDATE PROGRESS BARS
+
+  libraryProgress.style.width = `${libraryProgressPercentage}%`;
+  challengeProgress.style.width = `${challengeProgressPercentage}%`;
+};
+
 let formHandler = () => {
   const taskNameInput = document.querySelector(".task-name-input");
   const taskNameRegex =
@@ -275,7 +384,7 @@ let formHandler = () => {
       tasks.push(task);
       localStorage.setItem("tasks", JSON.stringify(tasks));
       renderTaskCard(task);
-      console.log(tasks);
+      updateTaskStats();
       removeFormModal();
     }
   });

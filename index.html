@@ -45,8 +45,8 @@
 
           <ul class="sidebar-list">
             <li>All Projects</li>
-            <li>Task Library (0)</li>
-            <li>Challenges (0)</li>
+            <li>Task Library (<span class="task-library-count">0</span>)</li>
+            <li>Challenges (<span class="challenges-count">0</span>)</li>
           </ul>
 
           <button class="sidebar-btn add-new-task-btn">
@@ -62,9 +62,10 @@
           </div>
 
           <ul class="sidebar-list">
-            <li>All (0)</li>
-            <li>In Progress (0)</li>
-            <li>Done (0)</li>
+            <li>All (<span class="all-tasks-count">0</span>)</li>
+             <li>Pending (<span class="pending-count">0</span>)</li>
+            <li>In Progress (<span class="in-progress-count">0</span>)</li>
+            <li>Done (<span class="done-count">0</span>)</li>
           </ul>
 
           <button class="sidebar-btn add-new-task-btn">
@@ -115,20 +116,22 @@
         <section class="stats">
           <div class="stat-box">
             <h3>Total Tasks</h3>
+            <span class="total-tasks-count">0</span>
+          </div>
 
-            <span>3</span>
+          <div class="stat-box">
+            <h3>Pending</h3>
+            <span class="stats-pending-count">0</span>
           </div>
 
           <div class="stat-box">
             <h3>In Progress</h3>
-
-            <span>1</span>
+            <span class="stats-progress-count">0</span>
           </div>
 
           <div class="stat-box">
             <h3>Completed</h3>
-
-            <span>1</span>
+            <span class="stats-completed-count">0</span>
           </div>
         </section>
 
@@ -139,7 +142,7 @@
 
           <section class="projects-section">
             <div class="section-title">
-              <h2>Projects (0)</h2>
+              <h2>Projects</h2>
             </div>
 
             <div class="project-container">
@@ -161,10 +164,15 @@
                 </div>
 
                 <div class="card-footer">
-                  <span>0 Tasks • 0 Done</span>
+                  <span>
+                    <span class="library-total-count">0</span>
+                    Tasks •
+                    <span class="library-completed-count">0</span>
+                    Done
+                  </span>
 
                   <div class="progress-bar">
-                    <div class="progress"></div>
+                    <div class="progress library-progress"></div>
                   </div>
                 </div>
               </article>
@@ -186,10 +194,15 @@
                 </div>
 
                 <div class="card-footer">
-                  <span>0 Tasks • 0 Done</span>
+                  <span>
+                    <span class="challenges-total-count">0</span>
+                    Tasks •
+                    <span class="challenges-completed-count">0</span>
+                    Done
+                  </span>
 
                   <div class="progress-bar">
-                    <div class="progress"></div>
+                    <div class="progress challenges-progress"></div>
                   </div>
                 </div>
               </article>
@@ -200,7 +213,7 @@
 
           <section class="scheduled-section">
             <div class="section-title">
-              <h2>Scheduled (0)</h2>
+              <h2>Scheduled (<span class="scheduled-count">0</span>)</h2>
 
               <a href="#">View All</a>
             </div>
