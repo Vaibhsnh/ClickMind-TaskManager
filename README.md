@@ -22,7 +22,7 @@
 
 🔗 **Live Website**
 
-https://clickmind-task-manager.vercel.app/
+ https://vaibhsnh.github.io/ClickMind-TaskManager/
 ---
 
 ## 📌 Overview
